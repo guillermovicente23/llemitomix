@@ -125,25 +125,32 @@
         <section id="proyectos" class="py-16 md:py-24">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-text-light border-b border-primary-blue/50 pb-2 inline-block mx-auto">
-                    Portafolio y Gestión de Documentos
+                    Portafolio y Documentos
                 </h2>
                 <h3 class="text-xl md:text-2xl font-normal text-center mb-10 text-gray-400 mt-4">
-                    Explora y gestiona mis archivos de proyecto directamente en GitHub.
+                    Utiliza la nube de Google para subir y listar documentos.
                 </h3>
                 
-                <p class="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
-                    Para asegurar la **seguridad, la transparencia y el control de versiones**, todos los documentos, códigos fuente y proyectos de ingeniería se almacenan en un repositorio dedicado de GitHub. 
-                    Desde allí puedes **ver, descargar y subir** nuevos archivos si tienes los permisos adecuados.
+                <p class="text-lg text-gray-400 mb-8 max-w-4xl mx-auto">
+                    Esta sección está conectada a servicios de Google Cloud (Google Forms y Google Drive). Usa los botones a continuación para **subir documentos** (permitiendo que otros colaboren) o para **ver el listado completo** de archivos ya guardados.
                 </p>
 
-                <a href="TU_ENLACE_A_GITHUB_REPOSITORY" target="_blank" id="github-link-btn"
-                   class="inline-flex items-center px-8 py-4 text-lg font-bold text-white rounded-full shadow-lg transition-all duration-300 transform btn-primary hover:scale-[1.03] hover:shadow-primary-blue/50">
-                    <i data-lucide="github" class="w-6 h-6 mr-3"></i>
-                    Ir al Repositorio de Documentos (Subir/Ver/Descargar)
-                </a>
+                <div class="flex flex-col sm:flex-row justify-center gap-6">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSejG6aA3PnW-B_trEOpPjLVOh1e1mMzY8scKtDqR4mgUKtoPg/viewform?usp=header" target="_blank" 
+                       class="inline-flex items-center px-8 py-4 text-lg font-bold text-white rounded-full shadow-lg transition-all duration-300 transform btn-primary hover:scale-[1.03]">
+                        <i data-lucide="upload-cloud" class="w-6 h-6 mr-3"></i>
+                        Subir Documento (Formulario)
+                    </a>
+                    
+                    <a href="https://docs.google.com/spreadsheets/d/1zqiaBoogCvWbVAFF-9cFIBY08Dtq79w8CjAXcDwM98c/edit?resourcekey=&gid=1391102963#gid=1391102963" target="_blank" 
+                       class="inline-flex items-center px-8 py-4 text-lg font-bold rounded-full btn-secondary hover:scale-[1.03]">
+                        <i data-lucide="database" class="w-6 h-6 mr-3"></i>
+                        Ver Lista de Documentos
+                    </a>
+                </div>
 
                 <p class="mt-8 text-sm text-gray-500">
-                    *El acceso para subir y eliminar documentos está sujeto a los permisos de tu cuenta en el repositorio de GitHub.
+                    *Los documentos subidos se almacenan en Google Drive. El acceso y manipulación de esos documentos está regido por la configuración de permisos de tu Google Drive.
                 </p>
                 
             </div>
