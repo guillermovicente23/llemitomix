@@ -26,5 +26,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Nota: El elemento 'toast-message' se mantiene en el HTML pero no tiene lógica JS activa.
 });
