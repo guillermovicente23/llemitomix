@@ -1,231 +1,247 @@
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guillermo Vicente | Portafolio Profesional</title>
-    
-    <script src="script.js"></script>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'primary-blue': '#3b82f6',
-                        'dark-bg': '#111827', /* Fondo oscuro principal */
-                        'dark-card': '#1f2937', /* Fondo de tarjetas */
-                        'text-light': '#f9fafb',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guillermo Vicente | Portafolio Profesional</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#3b82f6',
+                        'dark-bg': '#111827', /* Fondo oscuro principal */
+                        'dark-card': '#1f2937', /* Fondo de tarjetas */
+                        'text-light': '#f9fafb',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+        <script src="script.js"></script> 
 </head>
 
-<body>
+<body class="bg-dark-bg text-text-light">
 
-    <div id="toast-message" class="fixed bottom-5 right-5 z-50 p-4 rounded-lg shadow-xl text-white transition-transform transform translate-y-20"></div>
+    <div id="toast-message" class="fixed bottom-5 right-5 z-50 p-4 rounded-lg shadow-xl text-white transition-transform transform translate-y-20"></div>
 
-    <header class="sticky top-0 z-50 bg-dark-bg/95 backdrop-blur-sm shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <a href="#inicio" class="text-2xl font-bold text-text-light hover:text-primary-blue transition-colors">
-                Guillermo Vicente
-            </a>
-            <nav class="hidden md:flex space-x-8">
-                <a href="#inicio" class="nav-link text-text-light">Inicio</a>
-                <a href="#habilidades" class="nav-link text-text-light">Habilidades</a>
-                <a href="#proyectos" class="nav-link text-text-light">Proyectos</a>
-                <a href="#contacto" class="nav-link text-text-light">Contacto</a>
-            </nav>
-            
-            <button id="menu-toggle" class="md:hidden text-text-light focus:outline-none">
-                <i data-lucide="menu" class="w-6 h-6"></i>
-            </button>
-        </div>
-        
-        <nav id="mobile-menu" class="hidden md:hidden bg-dark-bg shadow-lg">
-            <div class="px-4 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
-                <a href="#inicio" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-text-light">Inicio</a>
-                <a href="#habilidades" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-text-light">Habilidades</a>
-                <a href="#proyectos" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-text-light">Proyectos</a>
-                <a href="#contacto" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-text-light">Contacto</a>
-            </div>
-        </nav>
-    </header>
+    <header class="sticky top-0 z-50 bg-dark-bg/95 backdrop-blur-sm shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#inicio" class="text-2xl font-bold text-text-light hover:text-primary-blue transition-colors">
+                Guillermo Vicente
+            </a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#inicio" class="nav-link text-text-light">Inicio</a>
+                <a href="#habilidades" class="nav-link text-text-light">Habilidades</a>
+                <a href="#proyectos" class="nav-link text-text-light">Proyectos</a>
+                <a href="#contacto" class="nav-link text-text-light">Contacto</a>
+            </nav>
+            
+            <button id="menu-toggle" class="md:hidden text-text-light focus:outline-none">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+        
+        <nav id="mobile-menu" class="hidden md:hidden bg-dark-bg shadow-lg">
+            <div class="px-4 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
+                <a href="#inicio" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-text-light">Inicio</a>
+                <a href="#habilidades" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-text-light">Habilidades</a>
+                <a href="#proyectos" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-text-light">Proyectos</a>
+                <a href="#contacto" class="nav-link block px-3 py-2 rounded-md text-base font-medium text-text-light">Contacto</a>
+            </div>
+        </nav>
+    </header>
 
-    <main>
-        <section id="inicio" class="hero-section text-center py-20 md:py-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col items-center">
-                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight text-text-light">
-                    HOLA, SOY GUILLERMO VICENTE
-                </h1>
-                <p class="text-xl md:text-2xl text-primary-blue font-semibold mb-6">
-                    ESTUDIANTE DE INGENIERIA EN SISTEMAS EN UNIVERSIDAD MARIANO GALVEZ
-                </p>
-                <p class="max-w-3xl text-gray-400 mb-10 text-lg">
-                    Ingresé a esta carrera con la profunda motivación de **aprender a desarrollar software** que no solo sea funcional, sino que también resuelva problemas reales de manera eficiente y escalable. Mi objetivo es transformar ideas complejas en soluciones digitales innovadoras, dominando las bases de la Ingeniería en Sistemas para crear el futuro tecnológico.
-                </p>
-                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
-                    <a href="#proyectos" class="inline-block px-10 py-4 text-lg font-bold text-white rounded-full shadow-lg btn-primary">
-                        Explora mis Proyectos
-                    </a>
-                    <a href="#habilidades" class="inline-block px-10 py-4 text-lg font-bold rounded-full btn-secondary">
-                        Conóceme Más
-                    </a>
-                </div>
-            </div>
-        </section>
+    <main>
+        <section id="inicio" class="hero-section text-center py-20 md:py-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col items-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight text-text-light">
+                    HOLA, SOY GUILLERMO VICENTE
+                </h1>
+                <p class="text-xl md:text-2xl text-primary-blue font-semibold mb-6">
+                    ESTUDIANTE DE INGENIERIA EN SISTEMAS EN UNIVERSIDAD MARIANO GALVEZ
+                </p>
+                <p class="max-w-3xl text-gray-400 mb-10 text-lg">
+                    Ingresé a esta carrera con la profunda motivación de **aprender a desarrollar software** que no solo sea funcional, sino que también resuelva problemas reales de manera eficiente y escalable. Mi objetivo es transformar ideas complejas en soluciones digitales innovadoras, dominando las bases de la Ingeniería en Sistemas para crear el futuro tecnológico.
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
+                    <a href="#proyectos" class="inline-block px-10 py-4 text-lg font-bold text-white rounded-full shadow-lg btn-primary">
+                        Explora mis Proyectos
+                    </a>
+                    <a href="#habilidades" class="inline-block px-10 py-4 text-lg font-bold rounded-full btn-secondary">
+                        Conóceme Más
+                    </a>
+                </div>
+            </div>
+        </section>
 
-        <section id="habilidades" class="py-16 md:py-24 bg-dark-card">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-text-light border-b border-primary-blue/50 pb-2 inline-block mx-auto">
-                    CONÓCEME MÁS
-                </h2>
-                <h3 class="text-2xl md:text-3xl font-bold text-center mb-12 text-primary-blue mt-4">
-                    Mis Siguientes Habilidades
-                </h3>
-                
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8">
-                    
-                    <div class="flex flex-col items-center p-4 rounded-lg bg-dark-bg hover:shadow-xl hover:shadow-primary-blue/20 transition-all duration-300">
-                        <i data-lucide="terminal" class="w-10 h-10 text-blue-500 mb-2"></i>
-                        <span class="text-gray-300 text-sm font-medium">C++</span>
-                    </div>
+        <section id="habilidades" class="py-16 md:py-24 bg-dark-card">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-text-light border-b border-primary-blue/50 pb-2 inline-block mx-auto">
+                    CONÓCEME MÁS
+                </h2>
+                <h3 class="text-2xl md:text-3xl font-bold text-center mb-12 text-primary-blue mt-4">
+                    Mis Siguientes Habilidades
+                </h3>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8">
+                    
+                    <div class="flex flex-col items-center p-4 rounded-lg bg-dark-bg hover:shadow-xl hover:shadow-primary-blue/20 transition-all duration-300">
+                        <i data-lucide="terminal" class="w-10 h-10 text-blue-500 mb-2"></i>
+                        <span class="text-gray-300 text-sm font-medium">C++</span>
+                    </div>
 
-                    <div class="flex flex-col items-center p-4 rounded-lg bg-dark-bg hover:shadow-xl hover:shadow-primary-blue/20 transition-all duration-300">
-                        <i data-lucide="cpu" class="w-10 h-10 text-green-500 mb-2"></i>
-                        <span class="text-gray-300 text-sm font-medium">ARDUINO</span>
-                    </div>
+                    <div class="flex flex-col items-center p-4 rounded-lg bg-dark-bg hover:shadow-xl hover:shadow-primary-blue/20 transition-all duration-300">
+                        <i data-lucide="cpu" class="w-10 h-10 text-green-500 mb-2"></i>
+                        <span class="text-gray-300 text-sm font-medium">ARDUINO</span>
+                    </div>
 
-                    <div class="flex flex-col items-center p-4 rounded-lg bg-dark-bg hover:shadow-xl hover:shadow-primary-blue/20 transition-all duration-300">
-                        <i data-lucide="bolt" class="w-10 h-10 text-yellow-500 mb-2"></i>
-                        <span class="text-gray-300 text-sm font-medium">ELECTRÓNICA</span>
-                    </div>
-                    
-                    <div class="flex flex-col items-center p-4 rounded-lg bg-dark-bg hover:shadow-xl hover:shadow-primary-blue/20 transition-all duration-300">
-                        <i data-lucide="wrench" class="w-10 h-10 text-red-500 mb-2"></i>
-                        <span class="text-gray-300 text-sm font-medium text-center">MANTENIMIENTO DE COMPUTADORAS</span>
-                    </div>
+                    <div class="flex flex-col items-center p-4 rounded-lg bg-dark-bg hover:shadow-xl hover:shadow-primary-blue/20 transition-all duration-300">
+                        <i data-lucide="bolt" class="w-10 h-10 text-yellow-500 mb-2"></i>
+                        <span class="text-gray-300 text-sm font-medium">ELECTRÓNICA</span>
+                    </div>
 
-                    <div class="flex flex-col items-center p-4 rounded-lg bg-dark-bg hover:shadow-xl hover:shadow-primary-blue/20 transition-all duration-300">
-                        <i data-lucide="code" class="w-10 h-10 text-orange-500 mb-2"></i>
-                        <span class="text-gray-300 text-sm font-medium">HTML</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+                    <div class="flex flex-col items-center p-4 rounded-lg bg-dark-bg hover:shadow-xl hover:shadow-primary-blue/20 transition-all duration-300">
+                        <i data-lucide="wrench" class="w-10 h-10 text-red-500 mb-2"></i>
+                        <span class="text-gray-300 text-sm font-medium text-center">MANTENIMIENTO DE COMPUTADORAS</span>
+                    </div>
 
-        <section id="proyectos" class="py-16 md:py-24">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-center mb-12 flex-wrap">
-                    <h2 class="text-3xl md:text-4xl font-bold text-text-light mb-4 md:mb-0">
-                        Portafolio de Proyectos (Máx 8)
-                    </h2>
-                    <button id="open-upload-modal-btn" class="px-6 py-3 text-sm font-bold text-white rounded-full shadow-lg btn-primary flex items-center">
-                        <i data-lucide="upload-cloud" class="w-5 h-5 mr-2"></i> Subir/Registrar Proyectos
-                    </button>
-                </div>
-                
-                <div id="projects-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <p class="text-gray-500 col-span-full text-center p-8 bg-dark-card rounded-xl">Cargando proyectos...</p>
-                </div>
-            </div>
-        </section>
+                    <div class="flex flex-col items-center p-4 rounded-lg bg-dark-bg hover:shadow-xl hover:shadow-primary-blue/20 transition-all duration-300">
+                        <i data-lucide="code" class="w-10 h-10 text-orange-500 mb-2"></i>
+                        <span class="text-gray-300 text-sm font-medium">HTML</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <section id="contacto" class="py-16 md:py-24 bg-dark-card">
-            <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-text-light">
-                    Hablemos de tu Proyecto
-                </h2>
-                <p class="text-gray-400 mb-10 text-lg">
-                    Estoy disponible para nuevos retos profesionales o proyectos *freelance*. ¡Envíame un mensaje!
-                </p>
+        <section id="proyectos" class="py-16 md:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center mb-12 flex-wrap">
+                    <h2 class="text-3xl md:text-4xl font-bold text-text-light mb-4 md:mb-0">
+                        Portafolio de Proyectos (Firebase Cloud)
+                    </h2>
+                    <button id="open-upload-modal-btn" class="px-6 py-3 text-sm font-bold text-white rounded-full shadow-lg btn-primary flex items-center">
+                        <i data-lucide="upload-cloud" class="w-5 h-5 mr-2"></i> Subir Documento/Proyecto
+                    </button>
+                </div>
+                
+                <div id="projects-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <p class="text-gray-500 col-span-full text-center p-8 bg-dark-card rounded-xl">Cargando proyectos desde la nube...</p>
+                </div>
+            </div>
+        </section>
 
-                <div class="flex justify-center space-x-6">
-                    <a href="mailto:tu.correo@example.com" class="flex items-center text-text-light hover:text-primary-blue transition-colors">
-                        <i data-lucide="mail" class="w-6 h-6 mr-2"></i> Correo
-                    </a>
-                    <a href="https://linkedin.com/in/tunombredeusuario" target="_blank" class="flex items-center text-text-light hover:text-primary-blue transition-colors">
-                        <i data-lucide="linkedin" class="w-6 h-6 mr-2"></i> LinkedIn
-                    </a>
-                    <a href="https://github.com/tuusuario" target="_blank" class="flex items-center text-text-light hover:text-primary-blue transition-colors">
-                        <i data-lucide="github" class="w-6 h-6 mr-2"></i> GitHub
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
+        <section id="contacto" class="py-16 md:py-24 bg-dark-card">
+            <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-text-light">
+                    Hablemos de tu Proyecto
+                </h2>
+                <p class="text-gray-400 mb-10 text-lg">
+                    Estoy disponible para nuevos retos profesionales o proyectos *freelance*. ¡Envíame un mensaje!
+                </p>
 
-    <footer class="bg-dark-bg border-t border-gray-700 py-6">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400 text-sm">
-            <p>&copy; 2025 Guillermo Vicente. Todos los derechos reservados.</p>
-            <p>Hecho con ❤️ y Tailwind CSS.</p>
-        </div>
-    </footer>
+                <div class="flex justify-center space-x-6">
+                    <a href="mailto:tu.correo@example.com" class="flex items-center text-text-light hover:text-primary-blue transition-colors">
+                        <i data-lucide="mail" class="w-6 h-6 mr-2"></i> Correo
+                    </a>
+                    <a href="https://linkedin.com/in/tunombredeusuario" target="_blank" class="flex items-center text-text-light hover:text-primary-blue transition-colors">
+                        <i data-lucide="linkedin" class="w-6 h-6 mr-2"></i> LinkedIn
+                    </a>
+                    <a href="https://github.com/tuusuario" target="_blank" class="flex items-center text-text-light hover:text-primary-blue transition-colors">
+                        <i data-lucide="github" class="w-6 h-6 mr-2"></i> GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
 
+    <footer class="bg-dark-bg border-t border-gray-700 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400 text-sm">
+            <p>&copy; 2025 Guillermo Vicente. Todos los derechos reservados.</p>
+            <p>Hecho con ❤️ y Tailwind CSS, persistencia con Firebase.</p>
+        </div>
+    </footer>
 
-    <div id="upload-modal" class="fixed inset-0 bg-black bg-opacity-75 z-[100] hidden flex items-center justify-center p-4">
-        <div class="bg-dark-card rounded-xl p-8 w-full max-w-lg shadow-2xl">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold text-text-light">Registrar Proyectos (Máx 8)</h3>
-                <button id="close-upload-modal" class="text-gray-400 hover:text-white transition-colors">
-                    <i data-lucide="x" class="w-6 h-6"></i>
-                </button>
-            </div>
-            <form id="upload-form">
-                <div class="mb-6">
-                    <label class="block text-gray-300 text-sm font-medium mb-2">Selecciona Archivos:</label>
-                    <input type="file" id="file-input" multiple required
-                            class="w-full text-sm text-gray-400 border border-gray-600 rounded-lg cursor-pointer bg-dark-bg file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary-blue file:text-white hover:file:bg-blue-700">
-                    <p class="mt-1 text-xs text-gray-500 text-yellow-400">🚨 **Nota Importante:** Los archivos solo serán visibles y descargables *mientras esta página esté abierta* en tu navegador. Si cierras o recargas, se pierden. El portafolio no puede almacenar archivos permanentemente.</p>
-                </div>
-                <button type="submit" id="upload-button" class="w-full px-4 py-3 text-lg font-bold text-white rounded-full btn-primary">
-                    Confirmar Registro
-                </button>
-            </form>
-        </div>
-    </div>
+        <div id="upload-modal" class="fixed inset-0 bg-black bg-opacity-75 z-[100] hidden flex items-center justify-center p-4">
+        <div class="bg-dark-card rounded-xl p-8 w-full max-w-lg shadow-2xl">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-text-light">Subir Proyecto/Documento (Firebase)</h3>
+                <button id="close-upload-modal" class="text-gray-400 hover:text-white transition-colors">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <form id="upload-form">
+                <div class="mb-4">
+                    <label for="project-name-input" class="block text-gray-300 text-sm font-medium mb-2">Nombre del Proyecto (Opcional):</label>
+                    <input type="text" id="project-name-input" placeholder="Ej: Reporte Final de Tesis"
+                        class="w-full px-4 py-2 rounded-lg bg-dark-bg border border-gray-600 focus:border-primary-blue focus:ring-primary-blue text-white" />
+                </div>
+                <div class="mb-6">
+                    <label for="file-input" class="block text-gray-300 text-sm font-medium mb-2">Selecciona Archivo:</label>
+                    <input type="file" id="file-input" required 
+                        class="w-full text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary-blue/20 file:text-primary-blue hover:file:bg-primary-blue/30"/>
+                    <p class="mt-2 text-xs text-gray-400">Archivos permitidos: PDF, DOCX, ZIP, imágenes.</p>
+                </div>
 
+                <div id="upload-progress-container" class="w-full bg-gray-700 rounded-full h-2.5 mb-4 hidden">
+                    <div id="upload-progress-bar" class="bg-primary-blue h-2.5 rounded-full" style="width: 0%"></div>
+                </div>
 
-    <div id="view-modal" class="fixed inset-0 bg-black bg-opacity-75 z-[100] hidden flex items-center justify-center p-4">
-        <div class="bg-dark-card rounded-xl p-8 w-full max-w-lg shadow-2xl">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold text-primary-blue">Metadatos del Documento</h3>
-                <button id="close-view-modal" class="text-gray-400 hover:text-white transition-colors">
-                    <i data-lucide="x" class="w-6 h-6"></i>
-                </button>
-            </div>
-            <div class="space-y-4">
-                <p class="text-lg font-semibold text-text-light">
-                    Nombre: <span id="modal-project-name" class="font-normal text-gray-300 block break-words"></span>
-                </p>
-                <p class="text-lg font-semibold text-text-light">
-                    Tipo: <span id="modal-project-type" class="font-normal text-gray-300"></span>
-                </p>
-                <p class="text-lg font-semibold text-text-light">
-                    Tamaño: <span id="modal-project-size" class="font-normal text-gray-300"></span>
-                </p>
-                <div id="modal-project-content" class="pt-4 border-t border-gray-700 mt-4">
-                    <p class="text-gray-400 mb-4">Usa estos botones para ver o descargar el archivo (Temporalmente).</p>
-                    <a id="modal-view-btn" target="_blank" class="inline-flex items-center px-6 py-3 text-sm font-bold text-white rounded-full btn-primary hover:bg-blue-700 transition-colors mr-3 cursor-pointer">
-                        <i data-lucide="eye" class="w-4 h-4 mr-2"></i> Ver / Abrir
-                    </a>
-                    <a id="modal-download-btn" class="inline-flex items-center px-6 py-3 text-sm font-bold rounded-full btn-secondary cursor-pointer">
-                        <i data-lucide="download" class="w-4 h-4 mr-2"></i> Descargar
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+                <button type="submit" id="upload-button" class="w-full px-4 py-3 text-lg font-bold text-white rounded-full btn-primary">
+                    Subir a la Nube
+                </button>
+            </form>
+        </div>
+    </div>
+
+        <div id="view-modal" class="fixed inset-0 bg-black bg-opacity-75 z-[100] hidden flex items-center justify-center p-4">
+        <div class="bg-dark-card rounded-xl p-8 w-full max-w-lg shadow-2xl">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-primary-blue">Metadatos del Documento</h3>
+                <button id="close-view-modal" class="text-gray-400 hover:text-white transition-colors">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <p class="text-lg font-semibold text-text-light">
+                    Nombre: <span id="modal-project-name" class="font-normal text-gray-300 block break-words"></span>
+                </p>
+                <p class="text-lg font-semibold text-text-light">
+                    Tipo: <span id="modal-project-type" class="font-normal text-gray-300"></span>
+                </p>
+                <p class="text-lg font-semibold text-text-light">
+                    Tamaño: <span id="modal-project-size" class="font-normal text-gray-300"></span>
+                </p>
+                <div id="modal-project-content" class="pt-4 border-t border-gray-700 mt-4">
+                    <p class="text-gray-400 mb-4">Usa estos botones para ver, descargar, o eliminar el documento.</p>
+                    <div class="flex flex-wrap gap-3">
+                        <a id="modal-view-btn" target="_blank" class="inline-flex items-center px-6 py-3 text-sm font-bold text-white rounded-full btn-primary hover:bg-blue-700 transition-colors cursor-pointer">
+                            <i data-lucide="eye" class="w-4 h-4 mr-2"></i> Ver Documento
+                        </a>
+                        <a id="modal-download-btn" class="inline-flex items-center px-6 py-3 text-sm font-bold rounded-full btn-secondary cursor-pointer">
+                            <i data-lucide="download" class="w-4 h-4 mr-2"></i> Descargar
+                        </a>
+                        <button id="modal-delete-btn" class="inline-flex items-center px-6 py-3 text-sm font-bold rounded-full bg-red-600 text-white hover:bg-red-700 transition-colors cursor-pointer">
+                            <i data-lucide="trash-2" class="w-4 h-4 mr-2"></i> Eliminar Documento
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
