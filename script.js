@@ -1,8 +1,8 @@
 // ===============================================
-// INICIO DE LA APLICACIÓN (EVENT LISTENERS)
+// LÓGICA PRINCIPAL DEL PORTAFOLIO Y MODAL
 // ===============================================
 
-// Referencias a los elementos del modal
+// Referencias a los elementos del modal (deben coincidir con los IDs en index.html)
 const modal = document.getElementById('preview-modal');
 const modalTitle = document.getElementById('modal-title');
 const modalContent = document.getElementById('modal-content');
@@ -14,34 +14,41 @@ const modalLoading = document.getElementById('modal-loading');
  * @param {string} filePath La ruta relativa del archivo TXT (ej: 'codigos/archivo.txt').
  */
 function openModal(filePath) {
-    // 1. Mostrar la estructura del modal
+    // 1. Configuración inicial del modal y estado de carga
     modal.classList.remove('hidden');
-    modalContent.textContent = ''; // Limpiar contenido anterior
+    modalContent.textContent = ''; 
     modalLoading.classList.remove('hidden');
     
-    // Extraer el nombre del archivo para el título
+    // Extraer el nombre del archivo para el título y configurar el enlace de descarga
     const fileName = filePath.substring(filePath.lastIndexOf('/') + 1);
     modalTitle.textContent = `Vista Previa: ${fileName}`;
-    modalDownloadLink.href = filePath; // Configurar el enlace de descarga
+    modalDownloadLink.href = filePath; 
 
-    // 2. Cargar el contenido del archivo TXT usando fetch
+    // 2. Usar la API Fetch para cargar el contenido del archivo de texto
     fetch(filePath)
         .then(response => {
             if (!response.ok) {
-                // Si el archivo no se encuentra (Error 404), lanzamos un error
-                throw new Error('No se pudo encontrar o cargar el archivo. Verifica la ruta y el nombre del archivo.');
+                // Si el archivo no se encuentra (Error 404) o hay otro problema de red
+                throw new Error(`No se pudo encontrar el archivo (${response.status}).`);
             }
             return response.text();
         })
         .then(text => {
-            // 3. Mostrar el contenido
+            // 3. Mostrar el contenido cargado
             modalLoading.classList.add('hidden');
             modalContent.textContent = text;
         })
         .catch(error => {
-            // 4. Manejar errores y mostrar mensaje
+            // 4. Manejar y mostrar el error de carga
             modalLoading.classList.add('hidden');
-            modalContent.textContent = `ERROR: ${error.message}`;
+            modalContent.textContent = `
+ERROR AL CARGAR EL DOCUMENTO.
+Razón: ${error.message}
+
+Asegúrate de:
+1. La carpeta se llama EXACTAMENTE 'codigos'.
+2. Los 3 archivos tienen extensión '.txt' y el nombre correcto.
+`;
             console.error('Error de carga:', error);
         });
 }
@@ -79,6 +86,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Hacer las funciones openModal y closeModal globales (necesario para onclick en HTML)
+// Exportar las funciones para que sean accesibles desde el HTML (onclick)
 window.openModal = openModal;
 window.closeModal = closeModal;
