@@ -1,6 +1,5 @@
 // ===============================================
 // INICIO DE LA APLICACIÓN (EVENT LISTENERS)
-// Este script maneja la UI (menú e íconos) y el modal de vista previa.
 // ===============================================
 
 // Referencias a los elementos del modal
@@ -29,8 +28,8 @@ function openModal(filePath) {
     fetch(filePath)
         .then(response => {
             if (!response.ok) {
-                // Si el archivo no se encuentra (Error 404)
-                throw new Error('No se pudo encontrar o cargar el archivo.');
+                // Si el archivo no se encuentra (Error 404), lanzamos un error
+                throw new Error('No se pudo encontrar o cargar el archivo. Verifica la ruta y el nombre del archivo.');
             }
             return response.text();
         })
@@ -40,9 +39,9 @@ function openModal(filePath) {
             modalContent.textContent = text;
         })
         .catch(error => {
-            // 4. Manejar errores
+            // 4. Manejar errores y mostrar mensaje
             modalLoading.classList.add('hidden');
-            modalContent.textContent = `Error al cargar el archivo: ${error.message}. Asegúrate de que el archivo existe en la ruta '${filePath}'.`;
+            modalContent.textContent = `ERROR: ${error.message}`;
             console.error('Error de carga:', error);
         });
 }
@@ -58,12 +57,12 @@ function closeModal() {
 // Event listeners de la aplicación
 document.addEventListener('DOMContentLoaded', function() {
     
-    // 1. Inicializar íconos de Lucide
+    // Inicializar íconos de Lucide
     if (window.lucide) {
         window.lucide.createIcons();
     }
 
-    // 2. Lógica de menú móvil
+    // Lógica de menú móvil
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     if (menuToggle && mobileMenu) {
@@ -80,6 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Hacer las funciones openModal y closeModal globales
+// Hacer las funciones openModal y closeModal globales (necesario para onclick en HTML)
 window.openModal = openModal;
 window.closeModal = closeModal;
