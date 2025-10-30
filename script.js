@@ -28,22 +28,32 @@ function openModal(filePath) {
     // 2. Cargar el contenido del archivo TXT usando fetch
     fetch(filePath)
         .then(response => {
+            modalLoading.classList.add('hidden'); // Ocultar el spinner de carga
+            
             if (!response.ok) {
-                // Si el archivo no se encuentra (Error 404)
-                throw new Error('No se pudo encontrar o cargar el archivo.');
+                // Capturar el error 404 o cualquier otro error de HTTP
+                const status = response.status;
+                const statusText = response.statusText;
+                
+                // Mostrar un mensaje claro en la vista previa
+                modalContent.textContent = 
+                    `*** ERROR AL CARGAR EL ARCHIVO (Código ${status}: ${statusText}) ***\n\n` +
+                    `No se pudo encontrar el documento en la ruta:\n` +
+                    `'${filePath}'\n\n` +
+                    `VERIFICA que el archivo '${fileName}' exista y esté dentro de la carpeta 'codigos'`;
+                
+                throw new Error('Error de carga de archivo.');
             }
             return response.text();
         })
         .then(text => {
             // 3. Mostrar el contenido
-            modalLoading.classList.add('hidden');
             modalContent.textContent = text;
         })
         .catch(error => {
-            // 4. Manejar errores
-            modalLoading.classList.add('hidden');
-            modalContent.textContent = `Error al cargar el archivo: ${error.message}. Asegúrate de que el archivo existe en la ruta '${filePath}'.`;
-            console.error('Error de carga:', error);
+            // Este catch solo se ejecuta para errores de red o el error forzado arriba.
+            console.error('Error durante la solicitud:', error);
+            // El mensaje de error ya se mostró en el paso anterior si fue un 404.
         });
 }
 
