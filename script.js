@@ -1,7 +1,61 @@
 // ===============================================
 // INICIO DE LA APLICACIÓN (EVENT LISTENERS)
-// Este script solo maneja la UI (menú e íconos).
+// Este script maneja la UI (menú e íconos) y el modal de vista previa.
 // ===============================================
+
+// Referencias a los elementos del modal
+const modal = document.getElementById('preview-modal');
+const modalTitle = document.getElementById('modal-title');
+const modalContent = document.getElementById('modal-content');
+const modalDownloadLink = document.getElementById('modal-download-link');
+const modalLoading = document.getElementById('modal-loading');
+
+/**
+ * Función para abrir el modal y cargar el contenido del archivo TXT.
+ * @param {string} filePath La ruta relativa del archivo TXT (ej: 'codigos/archivo.txt').
+ */
+function openModal(filePath) {
+    // 1. Mostrar la estructura del modal
+    modal.classList.remove('hidden');
+    modalContent.textContent = ''; // Limpiar contenido anterior
+    modalLoading.classList.remove('hidden');
+    
+    // Extraer el nombre del archivo para el título
+    const fileName = filePath.substring(filePath.lastIndexOf('/') + 1);
+    modalTitle.textContent = `Vista Previa: ${fileName}`;
+    modalDownloadLink.href = filePath; // Configurar el enlace de descarga
+
+    // 2. Cargar el contenido del archivo TXT usando fetch
+    fetch(filePath)
+        .then(response => {
+            if (!response.ok) {
+                // Si el archivo no se encuentra (Error 404)
+                throw new Error('No se pudo encontrar o cargar el archivo.');
+            }
+            return response.text();
+        })
+        .then(text => {
+            // 3. Mostrar el contenido
+            modalLoading.classList.add('hidden');
+            modalContent.textContent = text;
+        })
+        .catch(error => {
+            // 4. Manejar errores
+            modalLoading.classList.add('hidden');
+            modalContent.textContent = `Error al cargar el archivo: ${error.message}. Asegúrate de que el archivo existe en la ruta '${filePath}'.`;
+            console.error('Error de carga:', error);
+        });
+}
+
+/**
+ * Función para cerrar el modal.
+ */
+function closeModal() {
+    modal.classList.add('hidden');
+}
+
+
+// Event listeners de la aplicación
 document.addEventListener('DOMContentLoaded', function() {
     
     // 1. Inicializar íconos de Lucide
@@ -14,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileMenu = document.getElementById('mobile-menu');
     if (menuToggle && mobileMenu) {
         menuToggle.addEventListener('click', function() {
-            // Muestra u oculta el menú móvil
             mobileMenu.classList.toggle('hidden');
         });
 
@@ -25,5 +78,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-
 });
+
+// Hacer las funciones openModal y closeModal globales
+window.openModal = openModal;
+window.closeModal = closeModal;
