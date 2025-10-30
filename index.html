@@ -128,14 +128,14 @@
                     Portafolio y Documentos de Texto (TXT)
                 </h2>
                 <h3 class="text-xl md:text-2xl font-normal text-center mb-10 text-gray-400 mt-4">
-                    Archivos de texto con vista previa y descarga.
+                    Documentos con vista previa y descarga.
                 </h3>
                 
                 <p class="text-lg text-gray-400 mb-12 max-w-4xl mx-auto">
                     Selecciona un documento para ver su contenido en una vista previa o descargarlo directamente.
                 </p>
 
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center lg:justify-start">
                     
                     <div class="bg-dark-card p-6 rounded-xl shadow-lg text-left border border-gray-700 hover:border-primary-blue/50 transition-all duration-300">
                         <div class="flex items-start mb-4">
@@ -159,24 +159,6 @@
                         <div class="flex items-start mb-4">
                             <i data-lucide="file-text" class="w-8 h-8 text-green-500 mr-3 flex-shrink-0"></i>
                             <div>
-                                <h4 class="text-xl font-bold text-text-light">CONTRASEÑA DE BANCO</h4>
-                                <p class="text-sm text-gray-400">Archivo de Texto (.txt)</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-300 mb-4 h-12 overflow-hidden">
-                            Documentación sobre la función de validación de contraseña.
-                        </p>
-                        <button onclick="openModal('codigos/CONTRASEÑA DE BANCO.txt')"
-                           class="inline-flex items-center px-6 py-2 text-md font-semibold text-white rounded-full transition-all duration-300 btn-primary hover:bg-blue-600">
-                            <i data-lucide="eye" class="w-5 h-5 mr-2"></i>
-                            Ver Contenido
-                        </button>
-                    </div>
-
-                    <div class="bg-dark-card p-6 rounded-xl shadow-lg text-left border border-gray-700 hover:border-primary-blue/50 transition-all duration-300">
-                        <div class="flex items-start mb-4">
-                            <i data-lucide="file-text" class="w-8 h-8 text-green-500 mr-3 flex-shrink-0"></i>
-                            <div>
                                 <h4 class="text-xl font-bold text-text-light">código de adriana</h4>
                                 <p class="text-sm text-gray-400">Archivo de Texto (.txt)</p>
                             </div>
@@ -191,9 +173,27 @@
                         </button>
                     </div>
                     
+                    <div class="bg-dark-card p-6 rounded-xl shadow-lg text-left border border-gray-700 hover:border-primary-blue/50 transition-all duration-300">
+                        <div class="flex items-start mb-4">
+                            <i data-lucide="file-text" class="w-8 h-8 text-green-500 mr-3 flex-shrink-0"></i>
+                            <div>
+                                <h4 class="text-xl font-bold text-text-light">CONTRASEÑA DE BANCO</h4>
+                                <p class="text-sm text-gray-400">Archivo de Texto (.txt)</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 mb-4 h-12 overflow-hidden">
+                            Documentación sobre la función de validación de contraseña.
+                        </p>
+                        <button onclick="openModal('codigos/CONTRASEÑA DE BANCO.txt')"
+                           class="inline-flex items-center px-6 py-2 text-md font-semibold text-white rounded-full transition-all duration-300 btn-primary hover:bg-blue-600">
+                            <i data-lucide="eye" class="w-5 h-5 mr-2"></i>
+                            Ver Contenido
+                        </button>
+                    </div>
+                    
                 </div>
-                <p class="mt-12 text-sm text-red-400">
-                    ⚠️ **Asegúrate de que la carpeta 'codigos' exista junto a index.html y contenga los 3 archivos .txt nombrados exactamente así.**
+                <p class="mt-12 text-sm text-gray-500">
+                    *Asegúrate de que los 3 archivos `.txt` estén en la carpeta **`codigos/`**.
                 </p>
                 
             </div>
@@ -223,13 +223,6 @@
         </section>
     </main>
 
-    <footer class="bg-dark-bg border-t border-gray-700 py-6">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400 text-sm">
-            <p>&copy; 2025 Guillermo Vicente. Todos los derechos reservados.</p>
-            <p>Hecho con ❤️ y Tailwind CSS.</p>
-        </div>
-    </footer>
-    
     <div id="preview-modal" class="hidden fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4" onclick="closeModal()">
         
         <div class="bg-dark-card rounded-lg w-full max-w-4xl max-h-[90vh] overflow-hidden shadow-2xl transition-all duration-300 transform scale-100" onclick="event.stopPropagation()">
