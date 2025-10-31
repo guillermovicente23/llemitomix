@@ -1,45 +1,45 @@
-/* Estilos necesarios para la marca de agua del body */
-
+/* Estilos generales para el body */
 body {
-    /* Establece la imagen de fondo (el logo UMG) */
-    background-image: url('umg (1).png');
+    font-family: 'Inter', sans-serif;
+    color: #f9fafb; /* Texto claro */
+    background-color: #111827; /* Fondo oscuro principal */
     
-    /* Evita que la imagen se repita */
+    /* Propiedades para la imagen de marca de agua */
+    background-image: url('umg (1).png'); /* Asegúrate que la ruta sea correcta */
     background-repeat: no-repeat;
+    background-position: top 20px right 20px; /* Posición: arriba a la derecha, con un pequeño margen */
+    background-size: 200px; /* Tamaño más grande para que se note, ajusta si es necesario */
+    background-attachment: fixed; /* Para que quede fija al hacer scroll */
     
-    /* Coloca la imagen en el centro superior de la página (puedes cambiar a 'center center' si quieres que esté justo en el medio) */
-    background-position: top center; 
+    /* Aplicamos una opacidad más directa al background para que se vea como marca de agua */
+    /* Nota: para la opacidad del background-image sin afectar el texto,
+       usaremos un truco con un gradiente si la opacidad directa no funciona bien con todos los navegadores.
+       Por ahora, probaremos con rgba para el color del body y ajustar la opacidad del bg-image a través de un filtro si es necesario */
     
-    /* Define el tamaño de la imagen. 300px es un buen tamaño para una marca de agua visible pero discreta */
-    background-size: 300px;
+    /* Para controlar la opacidad de la imagen de fondo sin afectar el texto,
+       la mejor manera es usar un fondo superpuesto o un filtro si se aplica directamente al body.
+       Vamos a probar con un `filter: opacity` en el background directamente si el navegador lo soporta,
+       o de lo contrario, la opacidad ya debería ser inherente a la imagen PNG si fue guardada así,
+       o recurriremos a un overlay. */
     
-    /* Fija la imagen para que no se mueva al hacer scroll */
-    background-attachment: fixed; 
+    /* Si el logo es un PNG con transparencia, y aún se ve muy fuerte, puedes usar esto: */
+    /* filter: opacity(0.1); */ /* Esto afecta a TODO el body, incluyendo texto. No es lo ideal. */
 }
 
-/* Para crear el efecto de marca de agua, se usa un pseudo-elemento
-   para controlar la opacidad sin afectar el texto y las secciones del portafolio. */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    
-    /* Vuelve a aplicar la imagen de fondo en el pseudo-elemento */
-    background-image: inherit;
-    background-repeat: inherit;
-    background-position: inherit;
-    background-size: inherit;
-    background-attachment: inherit;
-    
-    /* Establece una baja opacidad para el efecto de marca de agua (0.05 es muy sutil) */
-    opacity: 0.05; 
-    
-    /* Asegura que la marca de agua esté detrás de todo el contenido */
-    z-index: -1; 
-}
+/* Un truco común para la marca de agua en el body sin afectar el texto
+   es superponer un elemento transparente por encima de la imagen de fondo.
+   Sin embargo, dado que Tailwind ya gestiona el fondo de las secciones,
+   el enfoque más simple es que la imagen de fondo del body tenga un color base,
+   y luego las secciones del contenido tengan sus propios fondos.
+   
+   La clave es que tus secciones (hero-section, habilidades, proyectos, contacto)
+   tengan un `background-color` definido (como ya lo tienen),
+   para que la marca de agua del body se vea *detrás* de ellas, solo donde el body es visible directamente.
+   
+   Si la imagen sigue viéndose "plena" y no como marca de agua, es probable
+   que la imagen PNG no tenga la transparencia deseada, o que el `background-size`
+   y la posición necesiten más ajustes.
+*/
 
 /* Estilos de botones que complementan Tailwind CSS */
 .btn-primary {
