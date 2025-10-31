@@ -1,45 +1,36 @@
 /* Estilos generales para el body */
 body {
     font-family: 'Inter', sans-serif;
-    color: #f9fafb; /* Texto claro */
-    background-color: #111827; /* Fondo oscuro principal */
-    
-    /* Propiedades para la imagen de marca de agua */
-    background-image: url('umg (1).png'); /* Asegúrate que la ruta sea correcta */
-    background-repeat: no-repeat;
-    background-position: top 20px right 20px; /* Posición: arriba a la derecha, con un pequeño margen */
-    background-size: 200px; /* Tamaño más grande para que se note, ajusta si es necesario */
-    background-attachment: fixed; /* Para que quede fija al hacer scroll */
-    
-    /* Aplicamos una opacidad más directa al background para que se vea como marca de agua */
-    /* Nota: para la opacidad del background-image sin afectar el texto,
-       usaremos un truco con un gradiente si la opacidad directa no funciona bien con todos los navegadores.
-       Por ahora, probaremos con rgba para el color del body y ajustar la opacidad del bg-image a través de un filtro si es necesario */
-    
-    /* Para controlar la opacidad de la imagen de fondo sin afectar el texto,
-       la mejor manera es usar un fondo superpuesto o un filtro si se aplica directamente al body.
-       Vamos a probar con un `filter: opacity` en el background directamente si el navegador lo soporta,
-       o de lo contrario, la opacidad ya debería ser inherente a la imagen PNG si fue guardada así,
-       o recurriremos a un overlay. */
-    
-    /* Si el logo es un PNG con transparencia, y aún se ve muy fuerte, puedes usar esto: */
-    /* filter: opacity(0.1); */ /* Esto afecta a TODO el body, incluyendo texto. No es lo ideal. */
+    color: #f9fafb;
+    /* QUITAMOS background-image para que el ::after tome el control de la marca de agua */
+    position: relative; /* Importante para que el ::after se posicione correctamente */
 }
 
-/* Un truco común para la marca de agua en el body sin afectar el texto
-   es superponer un elemento transparente por encima de la imagen de fondo.
-   Sin embargo, dado que Tailwind ya gestiona el fondo de las secciones,
-   el enfoque más simple es que la imagen de fondo del body tenga un color base,
-   y luego las secciones del contenido tengan sus propios fondos.
-   
-   La clave es que tus secciones (hero-section, habilidades, proyectos, contacto)
-   tengan un `background-color` definido (como ya lo tienen),
-   para que la marca de agua del body se vea *detrás* de ellas, solo donde el body es visible directamente.
-   
-   Si la imagen sigue viéndose "plena" y no como marca de agua, es probable
-   que la imagen PNG no tenga la transparencia deseada, o que el `background-size`
-   y la posición necesiten más ajustes.
-*/
+/* MARCA DE AGUA UMG: Solución con pseudo-elemento ::after */
+body::after {
+    content: '';
+    position: fixed; /* Lo mantiene fijo en la ventana */
+    top: 20px;
+    right: 20px;
+    width: 200px; /* Define el ancho del logo */
+    height: 200px; /* Define la altura del logo */
+    
+    /* RUTA DE LA IMAGEN: REVISA ESTE NOMBRE */
+    background-image: url('umg (1).png'); 
+    
+    background-size: contain; /* Ajusta el logo dentro del tamaño definido */
+    background-repeat: no-repeat;
+    
+    /* Aplica una opacidad baja para el efecto de marca de agua */
+    opacity: 0.08; 
+    
+    /* Asegura que la marca de agua esté detrás de todo el contenido */
+    z-index: -1; 
+    
+    /* Permite el click-through */
+    pointer-events: none;
+}
+
 
 /* Estilos de botones que complementan Tailwind CSS */
 .btn-primary {
