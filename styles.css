@@ -1,46 +1,68 @@
-/* Ajuste para que el texto se mantenga legible en el fondo oscuro */
+/* Estilos necesarios para la marca de agua del body */
+
 body {
-    background-color: #111827;
-    color: #f9fafb;
-    font-family: 'Inter', sans-serif;
+    /* Establece la imagen de fondo (el logo UMG) */
+    background-image: url('umg (1).png');
+    
+    /* Evita que la imagen se repita */
+    background-repeat: no-repeat;
+    
+    /* Coloca la imagen en el centro superior de la página (puedes cambiar a 'center center' si quieres que esté justo en el medio) */
+    background-position: top center; 
+    
+    /* Define el tamaño de la imagen. 300px es un buen tamaño para una marca de agua visible pero discreta */
+    background-size: 300px;
+    
+    /* Fija la imagen para que no se mueva al hacer scroll */
+    background-attachment: fixed; 
 }
 
-/* Estilo para el hover de los enlaces de navegación */
-.nav-link:hover {
-    color: #3b82f6;
-    transition: color 0.2s ease-in-out;
+/* Para crear el efecto de marca de agua, se usa un pseudo-elemento
+   para controlar la opacidad sin afectar el texto y las secciones del portafolio. */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Vuelve a aplicar la imagen de fondo en el pseudo-elemento */
+    background-image: inherit;
+    background-repeat: inherit;
+    background-position: inherit;
+    background-size: inherit;
+    background-attachment: inherit;
+    
+    /* Establece una baja opacidad para el efecto de marca de agua (0.05 es muy sutil) */
+    opacity: 0.05; 
+    
+    /* Asegura que la marca de agua esté detrás de todo el contenido */
+    z-index: -1; 
 }
 
-/* Estilo para el botón primario (Descargar/Explorar) */
+/* Estilos de botones que complementan Tailwind CSS */
 .btn-primary {
     background-color: #3b82f6;
-    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
-}
-.btn-primary:hover:not(:disabled) {
-    background-color: #2563eb;
-    transform: translateY(-1px);
-}
-.btn-primary:disabled {
-    background-color: #60a5fa;
-    cursor: not-allowed;
+    transition: background-color 0.3s ease;
 }
 
-/* Estilo para el botón secundario (Conóceme Más) */
+.btn-primary:hover {
+    background-color: #2563eb;
+}
+
 .btn-secondary {
     background-color: transparent;
     border: 2px solid #3b82f6;
     color: #3b82f6;
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-}
-.btn-secondary:hover {
-    background-color: #3b82f6;
-    color: #ffffff;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Responsive: Pequeños ajustes para móvil */
-@media (max-width: 640px) {
-    .hero-section {
-        padding-top: 6rem;
-        padding-bottom: 4rem;
-    }
+.btn-secondary:hover {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.nav-link {
+    @apply text-base font-medium transition-colors duration-200 hover:text-primary-blue;
 }
