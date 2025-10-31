@@ -5,7 +5,7 @@ body {
     position: relative; /* Importante para que el ::after se posicione correctamente */
 }
 
-/* MARCA DE AGUA UMG: Solución con pseudo-elemento ::after - AHORA GRANDE Y CENTRAL */
+/* MARCA DE AGUA UMG: Solución con pseudo-elemento ::after - AHORA MÁS GRANDE */
 body::after {
     content: '';
     position: fixed; /* Lo mantiene fijo en la ventana */
@@ -13,21 +13,21 @@ body::after {
     left: 50%; /* Centrado horizontalmente */
     transform: translate(-50%, -50%); /* Ajuste para un centrado perfecto */
     
-    /* Aumentamos el tamaño considerablemente para que se vea grande */
-    width: 600px; /* Ancho del logo, ajusta si es necesario */
-    height: 600px; /* Altura del logo, ajusta si es necesario */
-    max-width: 90vw; /* Máximo 90% del ancho de la ventana para dispositivos pequeños */
-    max-height: 90vh; /* Máximo 90% de la altura de la ventana */
+    /* VALORES AUMENTADOS: 800px de ancho y alto */
+    width: 800px; 
+    height: 800px;
+    max-width: 90vw; 
+    max-height: 90vh; 
     
     /* RUTA DE LA IMAGEN: SE MANTIENE LA MISMA */
     background-image: url('umg (1).png'); 
     
-    background-size: contain; /* Ajusta el logo dentro del tamaño definido */
+    background-size: contain; 
     background-repeat: no-repeat;
-    background-position: center; /* Asegura que la imagen esté centrada dentro de su propio contenedor */
+    background-position: center; 
     
-    /* Aplica una opacidad baja para el efecto de marca de agua */
-    opacity: 0.08; /* Ajusta este valor (0.01 a 0.15) para la intensidad deseada */
+    /* Opacidad baja (0.08) para el efecto de marca de agua. Puedes subirla a 0.1 o 0.12 si quieres que se vea más. */
+    opacity: 0.08; 
     
     /* Asegura que la marca de agua esté detrás de todo el contenido */
     z-index: -1; 
